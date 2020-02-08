@@ -37,7 +37,8 @@ class HomeTeamFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btNextStep.setOnClickListener {
-            nextScreen()
+            //nextScreen()
+            sendHomeTeamName()
         }
     }
    /* private fun nextScreen() {
