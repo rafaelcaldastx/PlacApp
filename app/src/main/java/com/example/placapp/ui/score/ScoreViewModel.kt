@@ -1,7 +1,13 @@
 package com.example.placapp.ui.score
 
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
+import com.example.placapp.R
+import kotlinx.android.synthetic.main.activity_score.*
 
 class ScoreViewModel : ViewModel() {
     val goalHome = MutableLiveData<Int>()
@@ -23,3 +29,4 @@ class ScoreViewModel : ViewModel() {
         goalAway.value = goalAway.value?.plus(1)
     }
 }
+
