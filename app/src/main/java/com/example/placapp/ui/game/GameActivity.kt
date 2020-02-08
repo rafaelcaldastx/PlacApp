@@ -78,7 +78,7 @@ class GameActivity : AppCompatActivity() {
             }
         }
     }*/
-    private val mMessageReceiver = object : BroadcastReceiver() {
+    /*private val mMessageReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.hasExtra("event_name")) {
                 eventName = intent.getStringExtra("event_name")
@@ -90,6 +90,23 @@ class GameActivity : AppCompatActivity() {
             }
             if (intent.hasExtra("away_team")) {
                 awayTeam = intent.getStringExtra("away_team")
+                showScoreActivity()
+            }
+        }
+    }*/
+
+    private val mMessageReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (intent.hasExtra("event_name")) {
+                gameViewModel.eventName = intent.getStringExtra("event_name")
+                showHomeTeamFragment()
+            }
+            if (intent.hasExtra("home_team")) {
+                gameViewModel.homeTeam = intent.getStringExtra("home_team")
+                showAwayTeamFragment()
+            }
+            if (intent.hasExtra("away_team")) {
+                gameViewModel.awayTeam = intent.getStringExtra("away_team")
                 showScoreActivity()
             }
         }
