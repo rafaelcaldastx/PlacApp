@@ -12,16 +12,14 @@ class ScoreActivity : AppCompatActivity() {
         setContentView(R.layout.activity_score)
     }*/
 
-    class ScoreActivity : AppCompatActivity() {
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_score)
-            setExtras()
-        }
-        private fun setExtras() {
-            tvEventName.text = intent.extras?.getString("eventName")
-            tvGoalHome.text = intent.extras?.getString("homeTeam")
-            tvAwayGoal.text = intent.extras?.getString("awayTeam")
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+           super.onCreate(savedInstanceState)
+           setContentView(R.layout.activity_score)
+           setExtras()
+    }
+    private fun setExtras() {
+        tvEventName.text = intent.extras!!.getString("eventName")
+        textView4.text = intent.extras!!.getString("homeTeam")
+        textView5.text = intent.extras!!.getString("awayTeam")
     }
 }

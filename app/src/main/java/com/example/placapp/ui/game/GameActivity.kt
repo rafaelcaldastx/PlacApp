@@ -14,29 +14,27 @@ import kotlinx.android.synthetic.main.activity_game.*
 
 class GameActivity : AppCompatActivity() {
 
-  /*  override fun onCreate(savedInstanceState: Bundle?) {
+   override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         showEventFragment()
         ivBack.setOnClickListener {
             onBackPressed()
         }
+       registerBroadcastReceiver()
     }
     private fun showEventFragment() {
         val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.containerGame, EventFragment())
-        ft.commit()
+        if(supportFragmentManager.findFragmentByTag("EventFragment") == null) {
+            ft.add(R.id.containerGame, EventFragment(), "EventFragment")
+            ft.commit()
+        }
     }
- */
+
     private var eventName = ""
     private var homeTeam = ""
     private var awayTeam = ""
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game)
-        //mantenha o código dos slides anteriores adicionar a linha abaixo
-        registerBroadcastReceiver()
-    }
+
     private fun registerBroadcastReceiver() {
         val intentFilter = IntentFilter("FILTER_EVENT")
         intentFilter.addAction("FILTER_HOME_TEAM")
