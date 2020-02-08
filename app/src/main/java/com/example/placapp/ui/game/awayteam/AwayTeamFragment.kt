@@ -7,10 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 import com.example.placapp.R
 import com.example.placapp.ui.score.ScoreActivity
+import kotlinx.android.synthetic.main.fragment_away_team.*
 import kotlinx.android.synthetic.main.fragment_event.*
+import kotlinx.android.synthetic.main.fragment_event.btNextStep
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,10 +40,19 @@ class AwayTeamFragment : Fragment() {
             nextScreen()
         }
     }
-    private fun nextScreen() {
+    /*private fun nextScreen() {
         val nextScreen = Intent(activity, ScoreActivity::class.java)
         startActivity(nextScreen)
         activity?.finish()
+    }*/
+
+    private fun nextScreen() {
+        sendAwayTeamName()
+    }
+    private fun sendAwayTeamName() {
+        val intent = Intent("FILTER_AWAY_TEAM")
+        intent.putExtra("away_team", inputAwayTeam.text.toString())
+        LocalBroadcastManager.getInstance(requireContext()).sendBroadcast(intent)
     }
 
 }
