@@ -7,6 +7,7 @@ import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.placapp.R
 import com.example.placapp.ui.game.awayteam.AwayTeamFragment
@@ -16,6 +17,7 @@ import com.example.placapp.ui.score.ScoreActivity
 import kotlinx.android.synthetic.main.activity_game.*
 
 class GameActivity : AppCompatActivity() {
+    private lateinit var gameViewModel: GameViewModel
 
    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +27,15 @@ class GameActivity : AppCompatActivity() {
             onBackPressed()
         }
        registerBroadcastReceiver()
+       initViewModel()
     }
+
+    private fun initViewModel() {
+        gameViewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
+    }
+
+
+
     private fun showEventFragment() {
         val ft = supportFragmentManager.beginTransaction()
         if(supportFragmentManager.findFragmentByTag("EventFragment") == null) {
@@ -103,11 +113,20 @@ class GameActivity : AppCompatActivity() {
         ft?.addToBackStack(null)
         ft?.commit()
     }
-    private fun showScoreActivity() {
+    /*private fun showScoreActivity() {
         val nextScreen = Intent(this@GameActivity, ScoreActivity::class.java)
         nextScreen.putExtra("eventName", eventName)
         nextScreen.putExtra("homeTeam", homeTeam)
         nextScreen.putExtra("awayTeam", awayTeam)
+        startActivity(nextScreen)
+        finish()
+    }*/
+
+    private fun showScoreActivity() {
+        val nextScreen = Intent(this@GameActivity, ScoreActivity::class.java)
+        nextScreen.putExtra("eventName", gameViewModel.eventName)
+        nextScreen.putExtra("homeTeam", gameViewModel.homeTeam)
+        nextScreen.putExtra("awayTeam", gameViewModel.awayTeam)
         startActivity(nextScreen)
         finish()
     }
